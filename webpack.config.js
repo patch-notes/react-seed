@@ -1,14 +1,16 @@
-var path = require('path');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, 'app'),
-  entry: './main.js',
+  entry: ['babel-polyfill', './main.js'],
 
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
   },
+
+  devtool: 'eval-source-map',
 
   module: {
     loaders: [
@@ -29,9 +31,9 @@ module.exports = {
         test: /\.scss$/,
         loaders: [
           'style-loader',
-          'css-loader?camelCase&modules&importLoaders=1&' +
-          'localIdentName=[hash:base64:5]',
-          'sass-loader',
+          'css-loader?sourceMap=true&camelCase&modules&importLoaders=1&' +
+          'localIdentName=[name]-[local]___[hash:base64:5]',
+          'sass-loader?sourceMap=true',
         ],
       },
       {
@@ -57,12 +59,12 @@ module.exports = {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
-      }
-    ]
+      },
+    ],
   },
   plugins: [
     new CopyWebpackPlugin([
       { from: 'index.html' },
-    ])
-  ]
-}
+    ]),
+  ],
+};
