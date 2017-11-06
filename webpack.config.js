@@ -12,6 +12,12 @@ module.exports = {
 
   devtool: 'eval-source-map',
 
+  resolve: {
+    alias: {
+      'app': path.join(__dirname, 'app'),
+    },
+  },
+
   module: {
     loaders: [
       {
