@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, 'app'),
-  entry: ['babel-polyfill', './main.js'],
+  entry: ['./main.js'],
 
   output: {
     filename: 'bundle.js',
